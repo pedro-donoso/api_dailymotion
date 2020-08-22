@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API DAILYMOTION</title>
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap" rel="stylesheet">
+    <!-- google fonts -->
+    <!-- cdn vue js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <!-- cdn vue js -->
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- axios -->
+    <!-- cdn vue router -->
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <!-- cdn vue router -->
+    <!-- css bootstrap -->
+    <link type="text/css" rel="stylesheet" href="./assets/css/bootstrap.css">
+    <!-- css bootstrap -->
+    <!-- css personalizados -->
+    <link type="text/css" rel="stylesheet" href="./assets/css/main.css">
+    <!-- css personalizados -->
+</head>
+
+<body>
+    <!-- identifica a la aplicacion id -->
+     <!-- usando estructura de bootstrap -->
+    <div id="aplicacion" class="container">
+
+        <div class="row">
+
+            <!-- recorrer api e imprime con el v-for --> 
+        <!-- usar template no div -->
+        <template v-for="item in info">
+            
+
+            <div class="col-sm-3">
+                <div class="card">
+                    <img :src="'https://www.dailymotion.com/thumbnail/video/'+item.id" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.title }}</h5>
+                        <a v-bind:href="'https://www.dailymotion.com/video/'+item.id" class="btn btn-primary">Reproducir</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </template>
+
+        </div>
+           <!-- usando estructura de bootstrap -->
+
+        
+
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el: "#aplicacion",
+            data: {
+                info: []
+            },
+            mounted() {
+                // url de la api
+                axios.get("https://api.dailymotion.com/videos?channel=news&limit=10")
+                // asignar respuesta
+                .then(respuesta=>this.info=respuesta.data.list)
+            },
+        })
+    </script>
+    <!-- archivos bootstrap javascript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="./assets/js/bootstrap.js"></script>
+    <!-- archivos bootstrap javascript -->
+    <!-- archivos javascript personalizados -->
+    <script src="./assets/js/main.js"></script>
+    <!-- archivos javascript personalizados -->
+</body>
+
+</html>
